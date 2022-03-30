@@ -21,7 +21,7 @@ var arrayRes =[];
 
 var cgRes = "";
 
-window.alert("If NaN, wait a few seconds and refresh, API allows only 5 calls/second")
+
 
 //every wallet except burn
 for (let index = 0; index < urls.length; index++) {
@@ -89,8 +89,20 @@ var priceData = JSON.parse(xhReq.responseText);
 priceData = priceData["nft-champions"]["usd"];
 var Marketcap = parseInt(circSupply* parseFloat(priceData));
 
-document.getElementById('myText').innerHTML= "Circ. Supply: "+ numberWithCommas(circSupply) + "\n"+"Price: "+"$" + priceData +"\n"+ "Market cap: " +"$"+ numberWithCommas(Marketcap) ;
 
+function getClientTime(){
+let s =  new Date().toLocaleString();
+return s;
+}    
+
+
+
+
+document.getElementById('myText').innerHTML="$CHAMP STATS: \nCirc. Supply: "+ numberWithCommas(circSupply) + "\n"+"Price: "+"$" + priceData +"\n"+ "Market cap: " +"$"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
+
+if (Number.isNaN(circSupply)) {
+    window.alert('Please refresh!')
+}
 
 
 function refresh(){
@@ -166,11 +178,13 @@ function refresh(){
     priceData = priceData["nft-champions"]["usd"];
     var Marketcap = parseInt(circSupply* parseFloat(priceData));
 
-    window.alert("Refresh: done")
     //replacing textarea text
     var text ;
     text = document.getElementById("myText");
     if (text) {
-    text.innerHTML = "Circ. Supply: "+ numberWithCommas(circSupply) + "\n"+"Price: "+"$" + priceData +"\n"+ "Market cap: " +"$"+ numberWithCommas(Marketcap) ;
+    text.innerHTML = "$CHAMP STATS: \nCirc. Supply: "+ numberWithCommas(circSupply) + "\n"+"Price: "+"$" + priceData +"\n"+ "Market cap: " +"$"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
+    }
+    if (Number.isNaN(circSupply)) {
+        window.alert('Please refresh!')
     }
 }
