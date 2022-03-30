@@ -76,7 +76,7 @@ circSupply = parseInt(circSupply);
 
 //formating
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");//formating of the number
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");//formating of the number
 }
 
 
@@ -89,7 +89,7 @@ var priceData = JSON.parse(xhReq.responseText);
 priceData = priceData["nft-champions"]["usd"];
 var Marketcap = parseInt(circSupply* parseFloat(priceData));
 
-document.getElementById('myText').innerHTML= "Circ. Supply: "+ numberWithCommas(circSupply) + "  " + "Price: " + priceData+"$" +"     "+ "Marketcap: " + numberWithCommas(Marketcap)+"$" ;
+document.getElementById('myText').innerHTML= "Circ. Supply: "+ numberWithCommas(circSupply) + "  " + "Price: "+"$" + priceData +"     "+ "Market cap: " +"$"+ numberWithCommas(Marketcap) ;
 
 
 function refresh(){
@@ -170,6 +170,6 @@ function refresh(){
     var text ;
     text = document.getElementById("myText");
     if (text) {
-    text.innerHTML = "Circ. Supply: "+ numberWithCommas(circSupply) + "  " + "Price: " + priceData+"$" +"     "+ "Marketcap: " + numberWithCommas(Marketcap)+"$" ;
+    text.innerHTML = "Circ. Supply: "+ numberWithCommas(circSupply) + "  " + "Price: "+"$" + priceData +"     "+ "Market cap: " +"$"+ numberWithCommas(Marketcap) ;
     }
 }
