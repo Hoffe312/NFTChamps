@@ -79,6 +79,13 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");//formating of the number
 }
 
+function percentage(){
+
+    var TS = totalSupply-burnedTokens;
+    var percentageCirc = circSupply / TS;
+    var s = Number(percentageCirc).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2}); 
+    return s;
+}
 
 //pulling data from CGAPI
 var xhReq = new XMLHttpRequest();
@@ -98,7 +105,7 @@ return s;
 
 
 
-document.getElementById('myText').innerHTML="$CHAMP STATS: \nCirc. Supply: "+ numberWithCommas(circSupply) + "\n"+"Price: "+"$" + priceData +"\n"+ "Market cap: " +"$"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
+document.getElementById('myText').innerHTML="$CHAMP STATS: \nCirc.Supply: "+ numberWithCommas(circSupply)+" ("+percentage() + " of TS)\n"+"Price: $" + priceData +"\n"+ "Market cap: $"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
 
 if (Number.isNaN(circSupply)) {
     window.alert('Please refresh!')
@@ -182,7 +189,7 @@ function refresh(){
     var text ;
     text = document.getElementById("myText");
     if (text) {
-    text.innerHTML = "$CHAMP STATS: \nCirc. Supply: "+ numberWithCommas(circSupply) + "\n"+"Price: "+"$" + priceData +"\n"+ "Market cap: " +"$"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
+    text.innerHTML = "$CHAMP STATS: \nCirc.Supply: "+ numberWithCommas(circSupply) +" ("+percentage() + " of TS)\n"+"Price: $" + priceData +"\n"+ "Market cap: $"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
     }
     if (Number.isNaN(circSupply)) {
         window.alert('Please refresh!')
