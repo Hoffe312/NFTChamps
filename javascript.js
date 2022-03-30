@@ -92,9 +92,10 @@ var Marketcap = parseInt(circSupply* parseFloat(priceData));
 document.getElementById('myText').innerHTML= "Circ. Supply: "+ numberWithCommas(circSupply) + "\n"+"Price: "+"$" + priceData +"\n"+ "Market cap: " +"$"+ numberWithCommas(Marketcap) ;
 
 
+
 function refresh(){
     
-          
+    
     //initializing variables
     var burnRes= "";
 
