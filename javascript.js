@@ -13,73 +13,21 @@ var burnApi = "https://api.polygonscan.com/api?module=account&action=tokenbalanc
 
 var cgAPI = "https://api.coingecko.com/api/v3/simple/price?ids=nft-champions&vs_currencies=USD";
 
-var urls = [p2eAPI,treasuryApi,devApi,deployerApi,tsVestingApi,privApi,tsInc1Api,tsInc2Api,lockedApi];
+var urlAPI = [p2eAPI,treasuryApi,devApi,deployerApi,tsVestingApi,privApi,tsInc1Api,tsInc2Api,lockedApi];
 
-var burnRes= "";
+var burnRes= "";//Result string for the burn amount
 
-var arrayRes =[];
+var arrayRes =[];//Result array
 
-var cgRes = "";
+var cgRes = "";//Result from CG API
 
+var totalSupply = 1000000000;//total supply
 
-
-//every wallet except burn
-for (let index = 0; index < urls.length; index++) {
-    
-    $.ajax({
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        url: urls[index],
-        async:false,
-        success: function (data) { 
-                    
-            arrayRes.push(data.result)
-        },
-        dataType:"json"
-    });
-}
+var decimalChamp = 100000000;//decimal 8
 
 
-//burn
-$.ajax({
-    type: "POST",
-    contentType: "application/json; charset=utf-14",
-    dataType: "json",
-    url: burnApi ,
-    async:false,
-    success: function (data) {  
-             
-        burnRes= data.result
-    },
-    dataType:"json"
-});
-
-
-var arrayOfNumbers = arrayRes.map(Number);
-
-var lockedChamps =0;
-for (let i = 0; i < arrayOfNumbers.length; i++) {
-    lockedChamps += arrayOfNumbers[i];
-    
-}
-
-var totalSupply = 1000000000;
-var decimalChamp = 100000000;
-
-var burnedTokens = parseInt(burnRes)/decimalChamp;
-
-var lockedChamps = Math.floor(lockedChamps/decimalChamp);//devided by decimal
-
-var circSupply = totalSupply - burnedTokens - lockedChamps;
-circSupply = parseInt(circSupply);
-
-//formating
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");//formating of the number
-}
-
-function percentage(){
+//funtion that formats a number in percent
+function percentage(burnedTokens,circSupply){
 
     var TS = totalSupply-burnedTokens;
     var percentageCirc = circSupply / TS;
@@ -87,32 +35,19 @@ function percentage(){
     return s;
 }
 
-//pulling data from CGAPI
-var xhReq = new XMLHttpRequest();
-xhReq.open("GET","https://api.coingecko.com/api/v3/simple/price?ids=nft-champions&vs_currencies=USD",false);
-xhReq.send(null);
-
-var priceData = JSON.parse(xhReq.responseText);
-priceData = priceData["nft-champions"]["usd"];
-var Marketcap = parseInt(circSupply* parseFloat(priceData));
-
-
+//gets client time
 function getClientTime(){
 let s =  new Date().toLocaleString();
 return s;
 }    
 
-
-
-
-document.getElementById('myText').innerHTML="$CHAMP STATS: \nCirc.Supply: "+ numberWithCommas(circSupply)+" ("+percentage() + " of TS)\n"+"Price: $" + priceData +"\n"+ "Market cap: $"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
-
-if (Number.isNaN(circSupply)) {
-    window.alert('Please refresh!')
+//formats big numbers
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");//formating of the number
 }
 
-
-function refresh(){
+//main function
+function main(){
     
     
     //initializing variables
@@ -123,13 +58,13 @@ function refresh(){
     var cgRes = "";
 
     //every wallet except burn
-    for (let index = 0; index < urls.length; index++) {
+    for (let index = 0; index < urlAPI.length; index++) {
         
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            url: urls[index],
+            url: urlAPI[index],
             async:false,
             success: function (data) { 
                         
@@ -185,13 +120,15 @@ function refresh(){
     priceData = priceData["nft-champions"]["usd"];
     var Marketcap = parseInt(circSupply* parseFloat(priceData));
 
-    //replacing textarea text
-    var text ;
-    text = document.getElementById("myText");
-    if (text) {
-    text.innerHTML = "$CHAMP STATS: \nCirc.Supply: "+ numberWithCommas(circSupply) +" ("+percentage() + " of TS)\n"+"Price: $" + priceData +"\n"+ "Market cap: $"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
-    }
+    //output
+    document.getElementById('myText').innerHTML = "$CHAMP STATS: \nCirc.Supply: "+ numberWithCommas(circSupply) +" ("+percentage(burnedTokens,circSupply) + " of TS)\n"+"Price: $" + priceData +"\n"+ "Market cap: $"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
+    
+    //if output NaN caused by API Limit
     if (Number.isNaN(circSupply)) {
         window.alert('Please refresh!')
     }
 }
+
+//starts the programm
+main();
+
