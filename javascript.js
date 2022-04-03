@@ -46,9 +46,14 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");//formating of the number
 }
 
-//main function
 function main(){
-    
+    document.getElementById('button').style.cursor = 'wait';
+    document.getElementById('button').innerHTML = 'loading...';
+    setTimeout(refresh, 50)
+}
+
+//main function
+function refresh(){
     
     //initializing variables
     var burnRes= "";
@@ -127,6 +132,9 @@ function main(){
     if (Number.isNaN(circSupply)) {
         window.alert('Please refresh!')
     }
+    document.getElementById('button').style.cursor = 'pointer';
+    document.getElementById('button').innerHTML = 'Refresh'
+    
 }
 
 //starts the programm
