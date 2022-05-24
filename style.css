@@ -1,10 +1,6 @@
 body {
     background-image: url('https://pbs.twimg.com/media/FKNSN9qXEAEZjV6?format=jpg&name=4096x4096');
-    background-repeat: no-repeat  ;
-    
-    background-attachment: fixed;
-    background-size: cover;
-    
+    background-size: 100vw auto;
       }
   #button{
       cursor: pointer;
@@ -13,27 +9,27 @@ body {
       margin-left:auto;
       margin-right:auto;
       display:block;
-      margin-top:45px;
+      margin-top:1vw;
       
-      height: 80px;
-      width:200px;
+      height: 5vw;
+      width:11vw;
       font-weight: bolder; 
       font-size: large;
   }
 
   img {
-      width: 66px;
+      width: 5vw;
       margin-left: auto;
       margin-right: auto;
       display: block;
-      margin-top: 25%;
+      margin-top: 20%;
   }
 
   #myText {
-      font-size: 27px; 
-      border: groove 6px rgb(241, 46, 62);
+      font-size: 1.8vw; 
+      border: groove 1vw rgb(241, 46, 62);
       margin-left:auto;
       margin-right:auto;
       display:block;
-      margin-top:10px;   
+      margin-top:0.5vw;   
   }    
