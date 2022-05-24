@@ -1,15 +1,20 @@
 body {
     background-image: url('https://pbs.twimg.com/media/FKNSN9qXEAEZjV6?format=jpg&name=4096x4096');
-    background-repeat: no-repeat  ;
-    max-width: 100%;
+    background-size: 100vw auto;
+    background-repeat: no-repeat; 
+    background-position: center;
     background-attachment: fixed;
+    -webkit-background-size: cover;       
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    
+    height:100%;
+    width:100%;
+     
       }
   #button{
       cursor: pointer;
-      position: relative;
-      background-color:rgb(248, 245, 245);
+      background-color:rgb(227, 203, 211);
       margin-left:auto;
       margin-right:auto;
       display:block;
@@ -18,7 +23,7 @@ body {
       height: 5vw;
       width:11vw;
       font-weight: bolder; 
-      font-size: large;
+      font-size: 2vw;
   }
 
   img {
