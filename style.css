@@ -25,6 +25,9 @@ body {
       font-weight: bolder; 
       font-size: 2vw;
   }
+  *{
+      box-sizing: border-box;
+    }
 
   img {
       width: 5%;
