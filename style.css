@@ -1,15 +1,10 @@
 body {
     background-image: url('https://pbs.twimg.com/media/FKNSN9qXEAEZjV6?format=jpg&name=4096x4096');
-    background-repeat: no-repeat; 
-    background-position: center;
+    background-repeat: no-repeat  ;
+    max-width: 100%;
     background-attachment: fixed;
-    -webkit-background-size: cover;       
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
-    height:100%;
-    width:100%;
-    overflow: hidden; 
+    
       }
   #button{
       cursor: pointer;
