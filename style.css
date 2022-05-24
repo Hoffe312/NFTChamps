@@ -8,8 +8,8 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height:100%;
-    width:100%;
+    max-height:100%;
+    max-width:100%;
      
       }
   #button{
@@ -44,5 +44,5 @@ body {
       margin-right:auto;
       display:block;
       margin-top:0.5vw;
-      width: 45%;   
+      width: 40%;   
   }    
