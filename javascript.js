@@ -22,11 +22,13 @@ var arrayRes =[];//Result array
 var cgRes = "";//Result from CG API
 
 var totalSupply = 1000000000;//total supply
+var tsVestingStartingSupply = 87004430
+var privVestingStartingSupply = 49524000
 
 var decimalChamp = 100000000;//decimal 8
 
 
-//funtion that formats a number in percent
+//function that formats a number in percent
 function percentage(burnedTokens,circSupply){
 
     var TS = totalSupply-burnedTokens;
@@ -34,6 +36,13 @@ function percentage(burnedTokens,circSupply){
     var s = Number(percentageCirc).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2}); 
     return s;
 }
+
+function percentageVesting(startSupply, claimed){
+    var percentage = claimed/startSupply;
+    var s = Number(percentage).toLocaleString(undefined, {style:'percent',minimumFractionDigits:2});
+    return s;
+}
+
 
 //gets client time
 function getClientTime(){
@@ -49,7 +58,7 @@ function numberWithCommas(x) {
 function main(){
     document.getElementById('button').style.cursor = 'wait';
     document.getElementById('button').innerHTML = 'loading...';
-    setTimeout(refresh, 50)
+    setTimeout(refresh,50)
 }
 
 //main function
@@ -101,10 +110,8 @@ function refresh(){
     var lockedChamps =0;
     for (let i = 0; i < arrayOfNumbers.length; i++) {
         lockedChamps += arrayOfNumbers[i];
-        
-    }
+        }
     
-
     var burnedTokens = parseInt(burnRes)/decimalChamp;
 
     var lockedChamps = Math.floor(lockedChamps/decimalChamp);//devided by decimal
@@ -113,7 +120,11 @@ function refresh(){
     
     circSupply = parseInt(circSupply);
 
-    
+    tsVestingBalance = Math.floor(arrayRes[4]/decimalChamp);
+    var tsVestingClaimed = tsVestingStartingSupply-tsVestingBalance;
+    privVestingBalance = Math.floor(arrayRes[5]/decimalChamp);
+    var privVestingClaimed = privVestingStartingSupply - privVestingBalance;
+
 
     //pulling data from CGApi
     var xhReq = new XMLHttpRequest();
@@ -126,7 +137,12 @@ function refresh(){
     var Marketcap = parseInt(circSupply* parseFloat(priceData));
 
     //output
-    document.getElementById('myText').innerHTML = "$CHAMP STATS: \nCirc.Supply: "+ numberWithCommas(circSupply) +" ("+percentage(burnedTokens,circSupply) + " of TS)\n"+"Price: $" + priceData +"\n"+ "Market cap: $"+ numberWithCommas(Marketcap)+ "\nlast update:("+getClientTime()+")" ;
+    document.getElementById('myText').innerHTML = "$CHAMP STATS: \nCirc.Supply: "
+    + numberWithCommas(circSupply) + "("+percentage(burnedTokens,circSupply) + " of TS)\nPrice: $" + priceData +"\n"
+    + "Market cap: $"+ numberWithCommas(Marketcap)+ "\nts claimed: $"+numberWithCommas(tsVestingClaimed)+"/"+numberWithCommas(tsVestingStartingSupply)
+    +" (" +percentageVesting(tsVestingStartingSupply,tsVestingClaimed)+ ")"
+    +"\nprivate claimed:$"+numberWithCommas(privVestingClaimed)+ "/"+ numberWithCommas(privVestingStartingSupply) + " (" + percentageVesting(privVestingStartingSupply, privVestingClaimed) + ")"  ;
+
     
     //if output NaN caused by API Limit
     if (Number.isNaN(circSupply)) {
@@ -136,6 +152,8 @@ function refresh(){
     document.getElementById('button').innerHTML = 'Refresh'
     
 }
+
+
 
 //starts the programm
 main();
