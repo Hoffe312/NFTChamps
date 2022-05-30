@@ -24,6 +24,8 @@ var cgRes = "";//Result from CG API
 var totalSupply = 1000000000;//total supply
 var tsVestingStartingSupply = 87004430
 var privVestingStartingSupply = 49524000
+var tsIncVestingStart = 17866667
+var moonWhaleVestingStart = 20033333
 
 var decimalChamp = 100000000;//decimal 8
 
@@ -54,6 +56,15 @@ return s;
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");//formating of the number
 }
+
+function vesting() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
 
 function main(){
     document.getElementById('button').style.cursor = 'wait';
@@ -120,16 +131,26 @@ function refresh(){
     
     circSupply = parseInt(circSupply);
 
-    tsVestingBalance = Math.floor(arrayRes[4]/decimalChamp);
+
+    //VestingBalances
+    var tsVestingBalance = Math.floor(arrayRes[4]/decimalChamp);//tsPublic
     var tsVestingClaimed = tsVestingStartingSupply-tsVestingBalance;
-    privVestingBalance = Math.floor(arrayRes[5]/decimalChamp);
+
+    var privVestingBalance = Math.floor(arrayRes[5]/decimalChamp);//private
     var privVestingClaimed = privVestingStartingSupply - privVestingBalance;
+
+    var tsIncVestingBalance = Math.floor(arrayRes[6]/decimalChamp);//tsInc
+    var tsIncVestingClaimed = tsIncVestingStart - tsIncVestingBalance;
+
+    var moonWhaleVestingBalance = Math.floor(arrayRes[7]/decimalChamp);//moonWhale
+    var moonWhaleVestingClaimed = moonWhaleVestingStart- moonWhaleVestingBalance;
 
 
     //pulling data from CGApi
     var xhReq = new XMLHttpRequest();
     xhReq.open("GET","https://api.coingecko.com/api/v3/simple/price?ids=nft-champions&vs_currencies=USD",false);
     xhReq.send(null);
+
 
     var priceData = JSON.parse(xhReq.responseText);
     //accessing JSON Data
@@ -138,11 +159,20 @@ function refresh(){
 
     //output
     document.getElementById('myText').innerHTML = "$CHAMP STATS: \nCirc.Supply: "
-    + numberWithCommas(circSupply) + "("+percentage(burnedTokens,circSupply) + " of TS)\nPrice: $" + priceData +"\n"
-    + "Market cap: $"+ numberWithCommas(Marketcap)+ "\nts claimed: $"+numberWithCommas(tsVestingClaimed)+"/"+numberWithCommas(tsVestingStartingSupply)
-    +" (" +percentageVesting(tsVestingStartingSupply,tsVestingClaimed)+ ")"
-    +"\nprivate claimed:$"+numberWithCommas(privVestingClaimed)+ "/"+ numberWithCommas(privVestingStartingSupply) + " (" + percentageVesting(privVestingStartingSupply, privVestingClaimed) + ")"  ;
+    + numberWithCommas(circSupply) + "("+percentage(burnedTokens,circSupply) 
+    + " of TotalSupply)\nPrice: $" + priceData +"\n"
+    + "Market cap: $"+ numberWithCommas(Marketcap)
+    +"\nlast refresh: "+getClientTime();
 
+    document.getElementById('myDIV').innerText = "Ts Public claimed: $"+numberWithCommas(tsVestingClaimed)
+    +" / "+numberWithCommas(tsVestingStartingSupply)
+    +" (" +percentageVesting(tsVestingStartingSupply,tsVestingClaimed)+ ")"
+    +"\nprivate claimed: $"+numberWithCommas(privVestingClaimed)+ " / "+ numberWithCommas(privVestingStartingSupply) 
+    + " (" + percentageVesting(privVestingStartingSupply, privVestingClaimed) + ")" 
+    + "\nTrustswap Inc claimed: $"+ numberWithCommas(tsIncVestingClaimed) 
+    +" / " + numberWithCommas(tsIncVestingStart) + " (" + percentageVesting(tsIncVestingStart,tsIncVestingClaimed)+ ")\n"
+    +"MoonWhale Inc claimed: $" + numberWithCommas(moonWhaleVestingClaimed)+" / "+ numberWithCommas(moonWhaleVestingStart)
+    +" (" + percentageVesting(moonWhaleVestingStart,moonWhaleVestingClaimed) + ")";
     
     //if output NaN caused by API Limit
     if (Number.isNaN(circSupply)) {
