@@ -10,10 +10,11 @@ var tsInc1Api = "https://api.polygonscan.com/api?module=account&action=tokenbala
 var tsInc2Api = "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0xf3763abe055577beb7addb7e3554c0353be0cbe9&tag=latest&apikey=M7NCTMF6JMJE9ZBMF9T3GJFQMN6P33M3H9";
 var lockedApi = "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0x586c21a779c24efd2a8af33c9f7df2a2ea9af55c&tag=latest&apikey=M7NCTMF6JMJE9ZBMF9T3GJFQMN6P33M3H9";
 var burnApi = "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0x000000000000000000000000000000000000dead&tag=latest&apikey=T31REPDPQTXC5T8NRSKEJPXN8BW21241B9";
+var tsdifferentWallet= "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0xddcbec8a64d216dfcff58d7b2b76fbdd9d9140bc&tag=latest&apikey=8V4CJA7D73SQ2RB9T8NZ28QRVDEZY7G8YD";
 
 var cgAPI = "https://api.coingecko.com/api/v3/simple/price?ids=nft-champions&vs_currencies=USD";
 
-var urlAPI = [p2eAPI,treasuryApi,devApi,deployerApi,tsVestingApi,privApi,tsInc1Api,tsInc2Api,lockedApi];
+var urlAPI = [p2eAPI,treasuryApi,devApi,deployerApi,tsVestingApi,privApi,tsInc1Api,tsInc2Api,lockedApi, tsdifferentWallet];
 
 var burnRes= "";//Result string for the burn amount
 
@@ -25,6 +26,7 @@ var totalSupply = 1000000000;//total supply
 var tsVestingStartingSupply = 87004430
 var privVestingStartingSupply = 49524000
 var tsIncVestingStart = 17866667
+var tsIncSecondWallet = 9929400
 var moonWhaleVestingStart = 20033333
 
 var decimalChamp = 100000000;//decimal 8
@@ -139,7 +141,9 @@ function refresh(){
     var privVestingBalance = Math.floor(arrayRes[5]/decimalChamp);//private
     var privVestingClaimed = privVestingStartingSupply - privVestingBalance;
 
-    var tsIncVestingBalance = Math.floor(arrayRes[6]/decimalChamp);//tsInc
+    
+    var tsIncVestingBalance = arrayOfNumbers[6] + arrayOfNumbers[9] ;
+    var tsIncVestingBalance = Math.floor(tsIncVestingBalance/decimalChamp)//tsInc
     var tsIncVestingClaimed = tsIncVestingStart - tsIncVestingBalance;
 
     var moonWhaleVestingBalance = Math.floor(arrayRes[7]/decimalChamp);//moonWhale
@@ -169,9 +173,9 @@ function refresh(){
     +" (" +percentageVesting(tsVestingStartingSupply,tsVestingClaimed)+ ")"
     +"\nprivate claimed: $"+numberWithCommas(privVestingClaimed)+ " / "+ numberWithCommas(privVestingStartingSupply) 
     + " (" + percentageVesting(privVestingStartingSupply, privVestingClaimed) + ")" 
-    + "\nTrustswap Inc claimed: $"+ numberWithCommas(tsIncVestingClaimed) 
+    + "\nTrustswap Inc sold: $"+ numberWithCommas(tsIncVestingClaimed) 
     +" / " + numberWithCommas(tsIncVestingStart) + " (" + percentageVesting(tsIncVestingStart,tsIncVestingClaimed)+ ")\n"
-    +"MoonWhale Inc claimed: $" + numberWithCommas(moonWhaleVestingClaimed)+" / "+ numberWithCommas(moonWhaleVestingStart)
+    +"MoonWhale Inc sold: $" + numberWithCommas(moonWhaleVestingClaimed)+" / "+ numberWithCommas(moonWhaleVestingStart)
     +" (" + percentageVesting(moonWhaleVestingStart,moonWhaleVestingClaimed) + ")";
     
     //if output NaN caused by API Limit
