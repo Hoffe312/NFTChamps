@@ -173,8 +173,6 @@ function refresh(){
     +" (" +percentageVesting(tsVestingStartingSupply,tsVestingClaimed)+ ")"
     +"\nprivate claimed: $"+numberWithCommas(privVestingClaimed)+ " / "+ numberWithCommas(privVestingStartingSupply) 
     + " (" + percentageVesting(privVestingStartingSupply, privVestingClaimed) + ")" 
-    + "\nTrustswap Inc sold: $"+ numberWithCommas(tsIncVestingClaimed) 
-    +" / " + numberWithCommas(tsIncVestingStart) + " (" + percentageVesting(tsIncVestingStart,tsIncVestingClaimed)+ ")\n"
     +"MoonWhale Inc sold: $" + numberWithCommas(moonWhaleVestingClaimed)+" / "+ numberWithCommas(moonWhaleVestingStart)
     +" (" + percentageVesting(moonWhaleVestingStart,moonWhaleVestingClaimed) + ")";
     
