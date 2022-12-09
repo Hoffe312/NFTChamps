@@ -161,20 +161,17 @@ function refresh(){
     priceData = priceData["nft-champions"]["usd"];
     var Marketcap = parseInt(circSupply* parseFloat(priceData));
 
+    let formattedCircSupply = numberWithCommas(circSupply);
+    let percentageOfCircSupply = percentage(burnedTokens,circSupply) ;
+    let formattedMcap = numberWithCommas(Marketcap);
+
     //output
     document.getElementById('myText').innerHTML = "$CHAMP STATS: \nCirc.Supply: "
-    + numberWithCommas(circSupply) + "("+percentage(burnedTokens,circSupply) 
+    + formattedCircSupply + "("+ percentageOfCircSupply
     + " of TotalSupply)\nPrice: $" + priceData +"\n"
-    + "Market cap: $"+ numberWithCommas(Marketcap)
+    + "Market cap: $"+ formattedMcap
     +"\nlast refresh: "+getClientTime();
 
-    document.getElementById('myDIV').innerText = "Ts Public claimed: $"+numberWithCommas(tsVestingClaimed)
-    +" / "+numberWithCommas(tsVestingStartingSupply)
-    +" (" +percentageVesting(tsVestingStartingSupply,tsVestingClaimed)+ ")"
-    +"\nprivate claimed: $"+numberWithCommas(privVestingClaimed)+ " / "+ numberWithCommas(privVestingStartingSupply) 
-    + " (" + percentageVesting(privVestingStartingSupply, privVestingClaimed) + ")\n" 
-    +"MoonWhale Inc sold: $" + numberWithCommas(moonWhaleVestingClaimed)+" / "+ numberWithCommas(moonWhaleVestingStart)
-    +" (" + percentageVesting(moonWhaleVestingStart,moonWhaleVestingClaimed) + ")";
     
     //if output NaN caused by API Limit
     if (Number.isNaN(circSupply)) {
@@ -183,10 +180,10 @@ function refresh(){
     document.getElementById('button').style.cursor = 'pointer';
     document.getElementById('button').innerHTML = 'Refresh'
     
+    return formattedCircSupply, priceData, formattedMcap
 }
 
-
-
+module.exports = {refresh}
 //starts the programm
 main();
 
