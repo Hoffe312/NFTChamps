@@ -1,6 +1,6 @@
 
 //initializing
-var p2eAPI = "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0xc6695c80913a37219929ec26f746283842d02cd0&tag=latest&apikey=T31REPDPQTXC5T8NRSKEJPXN8BW21241B9";
+var p2eAPI = "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0x2ac5c6400bb5714cfaec5e45f58e31a34dda8f3e&tag=latest&apikey=T31REPDPQTXC5T8NRSKEJPXN8BW21241B9";
 var treasuryApi = "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0xceeae72d35f5e6fb3e479f0e21eb0f1974146cd4&tag=latest&apikey=T31REPDPQTXC5T8NRSKEJPXN8BW21241B9";
 var devApi = "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0xf2e4efbcec08d128205d299d6358e7d095eab2f4&tag=latest&apikey=T31REPDPQTXC5T8NRSKEJPXN8BW21241B9";
 var deployerApi = "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x8f9E8e833A69Aa467E42c46cCA640da84DD4585f&address=0xd5a7661d150b41de85a18f756e0fda78c4bb7d0a&tag=latest&apikey=T31REPDPQTXC5T8NRSKEJPXN8BW21241B9";
