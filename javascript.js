@@ -146,18 +146,14 @@ async function main() {
     // Berechnung der Marktkapitalisierung
     const marketCap = remainingTokens * price;
     
-  
+    return marketCap, remainingTokens;
     //formats big numbers
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "_");//formating of the number
     }
     // Ausgabe der Ergebnisse
-    module.exports = {
-        marketCap,
-        remainingTokens
-  }
     };
     
   
-  main();
+export default main;
 
