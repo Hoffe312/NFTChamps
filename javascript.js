@@ -149,7 +149,7 @@ async function main() {
   
     //formats big numbers
     function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "_");//formating of the number
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "_");//formating of the number
     }
     // Ausgabe der Ergebnisse
     module.exports = {
