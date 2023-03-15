@@ -20,7 +20,7 @@ app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
 
-const botToken = 'YOUR_TELEGRAM_BOT_TOKEN'; // Ersetzen Sie dies durch Ihren erhaltenen Bot-Token
+const botToken = '5963822653:AAGrHiIoFzIyvFZmgAN696Fy5336yVmODoI'; // Ersetzen Sie dies durch Ihren erhaltenen Bot-Token
 const bot = new Telegraf(botToken);
 
 bot.start((ctx) => ctx.reply('Willkommen beim NFT Champ Tool Bot!'));
@@ -28,7 +28,7 @@ bot.help((ctx) => ctx.reply('Gib /data ein, um die neuesten Daten abzurufen.'));
 
 bot.command('data', async (ctx) => {
     try {
-        const response = await axios.get('http://localhost:3000/api/data');
+        const response = await axios.get('https://pure-fortress-24810.herokuapp.com/');
         ctx.reply(JSON.stringify(response.data.result, null, 2));
     } catch (error) {
         ctx.reply('Fehler beim Abrufen der Daten. Bitte versuchen Sie es später erneut.');

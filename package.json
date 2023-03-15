@@ -12,14 +12,14 @@
     "requirejs": "^2.3.6",
     "telegraf": "^4.12.2"
   },
+  "scripts": {
+    "start": "node javascript.js"
+  },
   "name": "nftchamp",
   "version": "1.0.0",
   "description": "tool for project",
   "main": "bot.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hoffe312/NFTChamps.git"
