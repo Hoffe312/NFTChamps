@@ -92,11 +92,6 @@ const tsInc2Balance = parseInt(tsInc2Response.data.result) / decimalChamp;
 const lockedBalance = parseInt(lockedResponse.data.result) / decimalChamp;
 const burnBalance = parseInt(burnResponse.data.result) / decimalChamp;
 const tsdifferentBalance = parseInt(tsdifferentWalletResponse.data.result) / decimalChamp;
-const xhReq = new XMLHttpRequest();
-xhReq.open("GET","https://api.coingecko.com/api/v3/simple/price?ids=nft-champions&vs_currencies=USD",false);
-xhReq.send(null);
-const priceData = JSON.parse(xhReq.responseText);
-priceData = priceData["nft-champions"]["usd"];
 
   // Prepare data
   const champStats = {
@@ -116,7 +111,20 @@ priceData = priceData["nft-champions"]["usd"];
 
   return champStats;
 }
+
+async function fetchPriceData() {
+    try {
+      const response = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=nft-champions&vs_currencies=USD");
+      const priceData = response.data;
+      const price = priceData["nft-champions"]["usd"];
+      console.log("Price:", price);
+      return price;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
 async function main() {
+    const price = await fetchPriceData();
     const champStats = await fetchData();
     const totalSupply = 1000000000;
     // Berechnung der Gesamtsumme
@@ -137,7 +145,7 @@ async function main() {
     const remainingTokens = totalSupply -vestedSupply;
   
     // Berechnung der Marktkapitalisierung
-    const marketCap = remainingTokens * champStats.priceData;
+    const marketCap = remainingTokens * price;
     
   
     //formats big numbers
