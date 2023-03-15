@@ -105,8 +105,7 @@ const tsdifferentBalance = parseInt(tsdifferentWalletResponse.data.result) / dec
     tsInc2Balance: tsInc2Balance,
     lockedBalance: lockedBalance,
     burnBalance: burnBalance,
-    tsdifferentBalance: tsdifferentBalance,
-    priceData: priceData
+    tsdifferentBalance: tsdifferentBalance
   };
 
   return champStats;
