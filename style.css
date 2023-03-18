@@ -12,19 +12,20 @@ body {
     max-width:100%;
      
       }
-  #button{
-      cursor: pointer;
-      background-color:rgb(238, 232, 234);
-      margin-left:auto;
-      margin-right:auto;
-      display: block;
-      margin-top:1vw;
-      
-      height: 5vw;
-      width: 20%;
-      font-weight: bolder; 
-      font-size: 2vw;
-  }
+      #button {
+        cursor: pointer;
+        background-color: rgb(238, 232, 234);
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        margin-top: 1vw;
+        height: 5vw;
+        width: 20%;
+        font-weight: bolder;
+        font-size: 2vw;
+        border-radius: 1vw;
+    }
+    
   *{
       box-sizing: border-box;
     }
@@ -38,14 +39,17 @@ body {
   }
 
   #myText {
-      font-size: 1.8vw; 
-      border: groove 1vw rgb(241, 46, 62);
-      margin-left:auto;
-      margin-right:auto;
-      display:block;
-      margin-top:0.5vw;
-      width: 54%;   
-  } 
+    font-size: 1.8vw;
+    border: groove 1vw rgb(241, 46, 62);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 0.5vw;
+    width: 54%;
+    padding: 1vw;
+    background-color: rgb(248, 248, 248);
+    border-radius: 1vw;
+}
   
   #myDIV {
     font-size: 1.5vw;
@@ -71,3 +75,101 @@ body {
     width: 20%;
     font-weight: bolder; 
   }
+
+  #toggleView {
+    cursor: pointer;
+    background-color: rgb(238, 232, 234);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 1vw;
+    height: 5vw;
+    width: 20%;
+    font-weight: bolder;
+    font-size: 2vw;
+    border-radius: 1vw;
+}
+
+#alternativeView {
+    margin-top: 1vw;
+    text-align: center;
+}
+
+#dropdown {
+    font-size: 1.5vw;
+    margin-bottom: 1vw;
+}
+
+#additionalOutput {
+    font-size: 1.8vw;
+    border: groove 1vw rgb(241, 46, 62);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 0.5vw;
+    width: 54%;
+    padding: 1vw;
+    border-radius: 0.5vw;
+}
+.market-cap-container {
+  margin-top: 1vw;
+  text-align: center;
+}
+
+#marketCapInput {
+  font-size: 1.5vw;
+  margin-bottom: 1vw;
+  margin-right: 1vw;
+}
+
+#marketCapButton {
+  cursor: pointer;
+  background-color: rgb(238, 232, 234);
+  height: 5vw;
+  font-weight: bolder;
+  font-size: 2vw;
+}
+
+#marketCapResult {
+  font-size: 1.8vw;
+  margin-top: 1vw;
+}
+
+
+
+  @media screen and (max-width: 768px) {
+    #button {
+      height: 10vw;
+      width: 60%;
+      font-size: 4vw;
+    }
+  
+    #myText {
+      font-size: 4vw;
+      border-width: 0.5vw;
+      margin-top: 1vw;
+      width: 90%;
+      padding: 2vw;
+      border-radius: 0.5vw;
+    }
+  
+    .calculation-container {
+      width: 100%;
+      padding: 1vw;
+    }
+  
+    #options,
+    #inputValue,
+    #calculateButton {
+      font-size: 3vw;
+    }
+  
+    #inputValue {
+      height: 5vw;
+    }
+  
+    #calculateButton {
+      height: 5vw;
+    }
+  }
+  

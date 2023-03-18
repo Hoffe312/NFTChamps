@@ -31,6 +31,19 @@ var moonWhaleVestingStart = 20033333
 
 var decimalChamp = 100000000;//decimal 8
 
+function toggleView() {
+  const resultBox = document.getElementById("resultBox");
+  const alternativeView = document.getElementById("alternativeView");
+
+  if (resultBox.style.display === "none") {
+      resultBox.style.display = "block";
+      alternativeView.style.display = "none";
+  } else {
+      resultBox.style.display = "none";
+      alternativeView.style.display = "block";
+  }
+}
+
 
 //function that formats a number in percent
 function percentage(burnedTokens,circSupply){
@@ -180,7 +193,28 @@ function refresh(){
     document.getElementById('button').style.cursor = 'pointer';
     document.getElementById('button').innerHTML = 'Refresh'
     
-    return formattedCircSupply, priceData, formattedMcap
+    return [formattedCircSupply, priceData, formattedMcap];
+
 }
 //starts the programm
 main();
+
+function calculateMarketCap() {
+  const [formattedCircSupply, priceData, formattedMcap] = refresh();
+
+  
+  const marketCapInput = document.getElementById("marketCapInput");
+  const marketCapResult = document.getElementById("marketCapResult");
+
+  const newMarketCap = parseFloat(marketCapInput.value);
+  if (isNaN(newMarketCap)) {
+      marketCapResult.innerHTML = "Please enter a valid MarketCap.";
+      return;
+  }
+
+  const multiplier = newMarketCap / int(formattedMcap);
+  const newPrice = float(priceData) * multiplier;
+
+  marketCapResult.innerHTML = `Multiplier: ${multiplier.toFixed(2)} | New price: ${newPrice.toFixed(2)}`;
+}
+
